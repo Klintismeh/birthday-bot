@@ -27,7 +27,7 @@ const client = new Client({
 });
 
 // Console: .env Check
-console.log(chalk.bgBlackBright.magenta("✅ .env loaded:"), {
+console.log(chalk.bgBlackBright(chalk.magenta("✅ .env loaded:")), {
   TOKEN: process.env.TOKEN ? "✅ Present" : "❌ Missing",
   CLIENT_ID: process.env.CLIENT_ID ? "✅ Present" : "❌ Missing",
   GUILD_ID: process.env.GUILD_ID ? "✅ Present" : "❌ Missing",
@@ -35,7 +35,7 @@ console.log(chalk.bgBlackBright.magenta("✅ .env loaded:"), {
 
 // When Bot is Ready
 client.once("ready", () => {
-  console.log(chalk.bgBlackBright.magenta(`🤖 Logged in as ${client.user.tag}`));
+  console.log(chalk.bgBlackBright(chalk.magenta(`🤖 Logged in as ${client.user.tag}`)));
   startDevConsole();
 
   // Keep-Alive Server for Render
@@ -43,7 +43,7 @@ client.once("ready", () => {
   const port = process.env.PORT || 3000;
   app.get("/", (req, res) => res.send("✅ Bot is online"));
   app.listen(port, () =>
-    console.log(chalk.bgBlackBright.magenta(`🌐 Express server listening on port ${port}`))
+    console.log(chalk.bgBlackBright(chalk.magenta(`🌐 Express server listening on port ${port}`)))
   );
 });
 
@@ -59,12 +59,12 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
   try {
-    console.log(chalk.bgBlackBright.magenta("📨 Registering slash command..."));
+    console.log(chalk.bgBlackBright(chalk.magenta("📨 Registering slash command...")));
     await rest.put(
       Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
       { body: commands }
     );
-    console.log(chalk.bgBlackBright.magenta("✅ Slash command registered."));
+    console.log(chalk.bgBlackBright(chalk.magenta("✅ Slash command registered.")));
   } catch (error) {
     console.error(chalk.red("❌ Failed to register commands:"), error);
   }
